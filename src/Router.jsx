@@ -8,7 +8,7 @@ import Loader from "./components/Loader";
 import Products from "./pages/Products";
 import Product from "./pages/Product";
 import Purchases from "./pages/Purchases";
-import NavBar from "./components/NavBar";
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
 import LogIn from "./pages/LogIn";
@@ -23,7 +23,7 @@ function Router()
         
      
         <BrowserRouter>
-	    <NavBar
+	    <Navbar
 		sendCategory={ category => setCategory( category )}
 		/>
 	    {isLoading && <Loader/>}
