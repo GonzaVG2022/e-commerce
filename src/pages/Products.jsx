@@ -26,10 +26,10 @@ filterByCategory(null, category)
   useEffect(() => {
 
     dispatch( getProductsThunk() )
-    axios
-    .get(`https://e-commerce-api.academlo.tech/api/v1/products/categories`)
-    .then( resp =>  setCategories(resp?.data?.data?.categories))
-    .catch(error => console.error(error))
+    // axios
+    // .get(`https://e-commerce-api.academlo.tech/api/v1/products/categories`)
+    // .then( resp =>  setCategories(resp?.data?.data?.categories))
+    // .catch(error => console.error(error))
         
   }, [] )
 useEffect( () => {
@@ -67,7 +67,7 @@ useEffect( () => {
   return (
     <div>
         {/* <h1 className="titel">Products</h1> */}
-       <div className="Botonera">{categorie.map((category) => (
+       {/* <div className="Botonera">{categorie.map((category) => (
         <Button 
           key={category.id}
           variant="primary"
@@ -81,7 +81,7 @@ useEffect( () => {
       ))}
       <Button variant="light" onClick={() => dispatch(getProductsThunk())}>
         Ver todos
-      </Button></div> 
+      </Button></div>  */}
       <div  className="conteiner__pro">
       <div className='filter'>
         <FormGroup >

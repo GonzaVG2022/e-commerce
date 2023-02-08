@@ -1,18 +1,18 @@
-// import Button from 'react-bootstrap/Button';
+
 import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
-	import Form from 'react-bootstrap/Form';
-	import Nav from 'react-bootstrap/Nav';
-	import Navbar from 'react-bootstrap/Navbar';
-	import NavDropdown from 'react-bootstrap/NavDropdown';
-	import Offcanvas from 'react-bootstrap/Offcanvas';
+import '../assets/styles/Nav.css'
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LogOut from "/src/pages/LogOut"; 
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
+
 import { getProductsThunk } from '../store/slices/getProducts.slice';
-import { CheckLg } from 'react-bootstrap-icons';
+
 
 	
 
@@ -45,24 +45,32 @@ const NavBar= ({sendCategory}) => {
 		<>
 		  
 			<Navbar  bg="danger" variant={'dark'} expand='md' className="mb-3">
-			  <Container fluid>
-				<Navbar.Brand as={Link} to={'/'}>Ecommece</Navbar.Brand>
+			  <Container fluid >
+				<Navbar.Brand 
+				className='tittel'
+				as={Link} to={'/'}
+				onClick={() => dispatch(getProductsThunk())}
+				>
+					Ecommece
+				</Navbar.Brand>
 				<Navbar.Toggle aria-controls='offcanvasNavbar-expand'/>
 				<Navbar.Offcanvas
 				  id='offcanvasNavbar-expand'
 				  aria-labelledby='offcanvasNavbarLabel-expand'
 				  placement="end"
+				  
 				>
-				  <Offcanvas.Header closeButton>
-					<Offcanvas.Title id='offcanvasNavbarLabel-expand'>
+				  <Offcanvas.Header closeButton className='close'>
+					<Offcanvas.Title id='offcanvasNavbarLabel-expand' >
 					  Ecommerce
 					</Offcanvas.Title>
 				  </Offcanvas.Header>
 				  <Offcanvas.Body>
-					<Nav className="justify-content-end flex-grow-1 pe-3">
+					<Nav className="justify-content-end flex-grow-1 pe-3 ">
 					<NavDropdown
 						title="Products"
 						id='offcanvasNavbarDropdown-expand'
+						className='button'
 					  >
 <div className="BotoneraNav">{categorie.map((category) => (
         <NavDropdown.Item 
@@ -85,8 +93,8 @@ const NavBar= ({sendCategory}) => {
 	  
 					  </NavDropdown>
 					  {/* <Nav.Link as={Link} to={'/'}>Products</Nav.Link> */}
-					  <Nav.Link as={Link} to={'/purchases'}>Purchases</Nav.Link>
-					  {!isLogged ? <Nav.Link as={Link} to="/login">Login</Nav.Link> : <LogOut/>}			
+					  <Nav.Link className='button' as={Link} to={'/purchases'}>Purchases</Nav.Link>
+					  {!isLogged ? <Nav.Link as={Link} to="/login" className='button'>Login</Nav.Link> : <LogOut/>}			
 					</Nav>
 					{/* <Form className="d-flex">
 					  <Form.Control
