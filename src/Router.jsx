@@ -8,25 +8,31 @@ import Loader from "./components/Loader";
 import Products from "./pages/Products";
 import Product from "./pages/Product";
 import Purchases from "./pages/Purchases";
-import Navbar from "./components/Navbar";
+import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
 import LogIn from "./pages/LogIn";
+import { useState } from "react";
 
 function Router()
 {
     const isLoading = useSelector(state => state.isLoading);   
+	const [category, setCategory] = useState('')
  
     return (
         
      
         <BrowserRouter>
-	    <Navbar/>
+	    <NavBar
+		sendCategory={ category => setCategory( category )}
+		/>
 	    {isLoading && <Loader/>}
 	    <Routes>
 	        <Route
                     path="/"
-	            element={<Products/>}
+	            element={<Products
+				category={category}
+				/>}
 	        />
 	        <Route
                     path="/product/:id"

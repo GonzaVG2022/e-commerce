@@ -12,7 +12,7 @@ import {addCartProductThunk} from "/src/store/slices/cartProducts.slice";
 import FormGroup from "react-bootstrap/FormGroup";
 import Form from "react-bootstrap/Form";
 
-const Products= () => {
+const Products= ({category}) => {
   const product = useSelector( state => state.getProducts )
   const [categorie, setCategories] = useState([])
   const [productsFiltered, setProductsFiltered] = useState ([])
@@ -20,6 +20,9 @@ const Products= () => {
     const [range, setRange] = useState({min: 0, max: 0});
     const dispatch = useDispatch();
 
+useEffect(() => {
+filterByCategory(null, category)
+},[category])
   useEffect(() => {
 
     dispatch( getProductsThunk() )
@@ -34,8 +37,8 @@ useEffect( () => {
 
 },[product])
 
-  const filterByCategory = (e) => {
-   const name = e.target.name;
+  const filterByCategory = (e,category) => {
+   const name = e ? e.target.name : category;
    const productsFiltered = product.filter( (p) => p.category.name == name);
    setProductsFiltered(productsFiltered)  
 
@@ -70,8 +73,10 @@ useEffect( () => {
           variant="primary"
           onClick={filterByCategory}
           name={category.name}
+          
         >
           {category.name}
+
         </Button>
       ))}
       <Button variant="light" onClick={() => dispatch(getProductsThunk())}>
@@ -169,10 +174,13 @@ useEffect( () => {
           </Col>
           ) ) }
         </Row>
+       
         </div>
         </div>
+       
     </div>
   )
 }
 
 export default Products
+

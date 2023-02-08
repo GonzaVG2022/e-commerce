@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {setIsLogged} from "/src/store/slices/isLogged.slice";
 import {useDispatch} from "react-redux";
+import  Nav  from "react-bootstrap/Nav";
 
 export default () => {
     const navigate = useNavigate();
@@ -12,5 +13,5 @@ export default () => {
         navigate("/");
     }
 
-    return <a style={{cursor: "pointer"}} onClick={() => logout()}>Logout</a>;
+    return <Nav.Link  onClick={() => logout()}>Logout</Nav.Link>;
 }
