@@ -1,29 +1,23 @@
 import '../assets/styles/Footer.css'
-import Card from 'react-bootstrap/Card';
+
+import { Container, Nav, Navbar } from 'react-bootstrap';
 
 function ImageAndTextExample() {
   return (
     <>
-      <Card>
-        {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-        <Card.Body className='footer'>
-        <footer>
-  <div class="container">
-    <div class="footer-links">
-      <ul>
-        <li><a href="#">Acerca de nosotros</a></li>
-        <li><a href="#">Política de privacidad</a></li>
-        <li><a href="#">Términos y condiciones</a></li>
-        <li><a href="#">Contacto</a></li>
-      </ul>
-    </div>
-    <p class="copyright">Todos los derechos reservados &copy; Nombre de la empresa</p>
-  </div>
-</footer>
-
-        </Card.Body>
-      </Card>
-      
+      <Navbar bg="dark" variant="dark" fixed="bottom"  >
+      <Container >
+        <Nav className="mr-auto">
+          <Nav.Link href="#">Acerca de nosotros</Nav.Link>
+          <Nav.Link href="#">Política de privacidad</Nav.Link>
+          <Nav.Link href="#">Términos y condiciones</Nav.Link>
+          <Nav.Link href="#">Contacto</Nav.Link>
+        </Nav>
+        <Navbar.Text>
+          Todos los derechos reservados &copy; Nombre de la empresa
+        </Navbar.Text>
+      </Container>
+    </Navbar>
     </>
   );
 }
