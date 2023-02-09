@@ -51,7 +51,7 @@ const NavBar= ({sendCategory}) => {
 				as={Link} to={'/'}
 				onClick={() => dispatch(getProductsThunk())}
 				>
-					Ecommece
+					Ecommerce
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls='offcanvasNavbar-expand'/>
 				<Navbar.Offcanvas
