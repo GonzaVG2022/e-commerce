@@ -1,4 +1,6 @@
-
+.offcanvas-body{
+    justify-content: flex-end;
+}
 .navB{
     max-width: 2000px;
     padding: 0;
