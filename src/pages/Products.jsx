@@ -119,7 +119,7 @@ useEffect( () => {
 	</FormGroup>
   </div>
   <div className="Products">
-        <Row xs={1} md={2} xl={3}>
+        <Row xs={1} md={2} xl={3} xxl={4}>
           {
            productsFiltered?.map(producItem => (
           
