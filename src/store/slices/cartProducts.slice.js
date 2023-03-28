@@ -14,17 +14,18 @@ export const cartProductsSlice = createSlice({
 export const getCartProductsThunk = () => dispatch => {
     dispatch(setIsLoading(true));
     axios
-	.get("https://e-commerce-api.academlo.tech/api/v1/cart", getConfig())
-	.then(res => dispatch(setCartProducts(res.data.data.cart.products)))
+	.get("https://ecommerce-g1mf.onrender.com/api/v1/carts", getConfig())
+	.then(res => dispatch(setCartProducts(res)))		
 	.catch(err => err.response.status !== 404 && console.log(err.response))
 	.finally(() => dispatch(setIsLoading(false)));
+	
 }
 
 export const addCartProductThunk = (product, quantity) => dispatch => {
     dispatch(setIsLoading(true));
     axios
 	.post(
-	    "https://e-commerce-api.academlo.tech/api/v1/cart", 
+	    "https://ecommerce-g1mf.onrender.com/api/v1/carts", 
 	    {id: product.id, quantity},
 	    getConfig()
 	)
@@ -36,7 +37,7 @@ export const addCartProductThunk = (product, quantity) => dispatch => {
 export const updateCartProductThunk = (id, newQuantity) => dispatch => {
     dispatch(setIsLoading(true));
     axios
-	.patch("https://e-commerce-api.academlo.tech/api/v1/cart", {id, newQuantity}, getConfig())
+	.patch("https://ecommerce-g1mf.onrender.com/api/v1/carts", {id, newQuantity}, getConfig())
 	.then(res => dispatch(getCartProductsThunk()))
 	.catch(err => console.log(err.response))
 	.finally(() => dispatch(setIsLoading(false)));
@@ -45,7 +46,7 @@ export const updateCartProductThunk = (id, newQuantity) => dispatch => {
 export const removeCartProductThunk = id => dispatch => {
     dispatch(setIsLoading(true));
     axios
-	.delete("https://e-commerce-api.academlo.tech/api/v1/cart/" + id, getConfig())
+	.delete("https://ecommerce-g1mf.onrender.com/api/v1/carts/" + id, getConfig())
 	.then(res => dispatch(getCartProductsThunk()))
 	.catch(err => console.log(err.response))
 	.finally(() => dispatch(setIsLoading(false)));

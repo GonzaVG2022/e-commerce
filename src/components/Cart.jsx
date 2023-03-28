@@ -76,7 +76,7 @@ function Cart({
 	if(getProducts)
 	{
             setProducts(cartProducts.map(product => {
-                const productImgs = getProducts.find(getProduct => getProduct.id === product.id).productImgs;
+                const productImgs = getProducts?.find(getProduct => getProduct.id === product.id).productImgs;
 	        return {
                     ...product,
 	            productImgs
@@ -118,8 +118,8 @@ function Cart({
 				        id="card-img"
 				        onClick={() => handleNavigate(`/product/${product.id}`)}
 				    >
-				    <img src={product?.productImgs[0]} alt={`This is a ${product.title} image`}/>
-					<figcaption>{product.title}</figcaption>
+				    <img src={product?.productImgs[0]} alt={`This is a ${product.titel} image`}/>
+					<figcaption>{product.titel}</figcaption>
 				        <span>Price</span><span>{`$${product.price}`}</span>
 				    </figure>
 				    <span

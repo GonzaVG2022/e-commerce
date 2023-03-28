@@ -133,6 +133,7 @@ useEffect( () => {
                       src={producItem.productImgs[0]}
                       style={{height:200, width:200, objectFit:'cover'}}
                       alt="First slide"
+                      
                     />
                     
                   </Carousel.Item>
@@ -159,7 +160,7 @@ useEffect( () => {
               </Carousel>
               
               <Card.Body className="card__body">
-                  <Card.Title>{producItem.title}</Card.Title>
+                  <Card.Title>{producItem.titel}</Card.Title>
                   <Card.Text>
                    ${producItem.price}
                   </Card.Text>

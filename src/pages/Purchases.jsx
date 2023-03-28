@@ -2,39 +2,44 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useState, useEffect } from "react";
 import ModalPurchases from "../components/ModalPurchases";
-import Container from "react-bootstrap/Container";
-import {useDispatch, useSelector} from "react-redux";
-import {getUserPurchasesThunk} from "/src/store/slices/userPurchases.slice";
+import axios from "axios";
+import getConfig from "../utils/getConfig";
 
 const Purchases = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = (info) => {
-        setShow(true)
-        setDataSelected(info)
-    }
-
-    const [dataSelected, setDataSelected] = useState({});
-    const userPurchases = useSelector(state => state.userPurchases);
-    const dispatch = useDispatch();
-
+        setShow(true);
+        setDataSelected(info);
+    };
+    const [purchases, setPurchases] = useState([]);
     useEffect(() => {
-        dispatch(getUserPurchasesThunk());
+        axios
+            .get(
+                "https://ecommerce-g1mf.onrender.com/api/v1/purchases",
+                getConfig()
+            )
+            .then((resp) => setPurchases(resp.data))
+            .catch((error) => console.error(error));
     }, []);
-
+    const [dataSelected, setDataSelected] = useState({});
     return (
-        <Container className="my-4">
         <div>
             <h2>My purchases</h2>
             <hr />
-            {userPurchases.map((purchase) =>
+            {purchases.map((purchase) =>
                 purchase.cart?.products?.map((item) => (
-                    <Card key={item.id} style={{margin:'1rem'}}>
-                        <Card.Header>{item.productsInCart?.createdAt.slice(0,10)}</Card.Header>
+                    <Card key={item.id} style={{ margin: "1rem" }}>
+                        <Card.Header>
+                            {item.productsInCart?.createdAt.slice(0, 10)}
+                        </Card.Header>
                         <Card.Body
-                            style={{ display: "flex", justifyContent: "space-around" }}
+                            style={{
+                                display: "flex",
+                                justifyContent: "space-around",
+                            }}
                         >
-                            <Card.Text>{item.title}</Card.Text>
+                            <Card.Text>{item.titel}</Card.Text>
                             <Card.Text
                                 style={{
                                     width: "30px",
@@ -48,20 +53,22 @@ const Purchases = () => {
                                 {item.productsInCart.quantity}
                             </Card.Text>
                             <Card.Text>{item.price}</Card.Text>
-                            <Button variant="primary" onClick={()=>handleShow(item)}>
+                            <Button
+                                variant="primary"
+                                onClick={() => handleShow(item)}
+                            >
                                 see details
                             </Button>
                         </Card.Body>
                     </Card>
                 ))
             )}
-            <ModalPurchases 
-            show={show} 
-            handleClose={handleClose} 
-            data={dataSelected}
+            <ModalPurchases
+                show={show}
+                handleClose={handleClose}
+                data={dataSelected}
             />
         </div>
-        </Container>
     );
 };
 

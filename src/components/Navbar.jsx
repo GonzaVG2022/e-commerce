@@ -10,7 +10,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LogOut from "/src/pages/LogOut"; 
 import axios from 'axios';
-
+import $Cart from './Cart';
+import { Cart } from 'react-bootstrap-icons';
+import { Button } from 'react-bootstrap';
 import { getProductsThunk } from '../store/slices/getProducts.slice';
 
 
@@ -20,6 +22,7 @@ const NavBar= ({sendCategory}) => {
 	
 	const isLogged = useSelector (state => state.isLogged)
 	const [categorie, setCategories] = useState([])
+	const [launch, setLaunch] = useState(false);
 	
 	const dispatch = useDispatch();
 
@@ -28,8 +31,8 @@ const NavBar= ({sendCategory}) => {
 
 		dispatch( getProductsThunk() )
 		axios
-		.get(`https://e-commerce-api.academlo.tech/api/v1/products/categories`)
-		.then( resp =>  setCategories(resp?.data?.data?.categories))
+		.get(`https://ecommerce-g1mf.onrender.com/api/v1/categories`)
+		.then( resp =>  setCategories(resp?.data))
 		.catch(error => console.error(error))
 			
 	  }, [] )
@@ -82,6 +85,7 @@ const NavBar= ({sendCategory}) => {
         >
           {category.name}
         </NavDropdown.Item>
+
       ))}
       <NavDropdown.Item variant="light" 
 	  onClick={() => dispatch(getProductsThunk())}
@@ -94,8 +98,13 @@ const NavBar= ({sendCategory}) => {
 					  </NavDropdown>
 					  {/* <Nav.Link as={Link} to={'/'}>Products</Nav.Link> */}
 					  <Nav.Link className='button' as={Link} to={'/purchases'}>Purchases</Nav.Link>
+					 
 					  {!isLogged ? <Nav.Link as={Link} to="/login" className='button'>Login</Nav.Link> : <LogOut/>}			
 					</Nav>
+					<Button
+	      variant="secondary"
+	      onClick={() => setLaunch(!launch)}
+	    ><Cart/></Button>
 					{/* <Form className="d-flex">
 					  <Form.Control
 						type="search"
@@ -109,7 +118,10 @@ const NavBar= ({sendCategory}) => {
 				</Navbar.Offcanvas>
 			  </Container>
 			</Navbar>
-		  
+		  <$Cart
+        sendLaunch={launch => setLaunch(launch)}
+        launch={launch}
+      />
 		</>
 	  );
 	}
