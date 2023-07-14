@@ -25,9 +25,9 @@ const Login = () => {
     };
 
     axios
-      .post("https://ecommerce-g1mf.onrender.com/api/v1/users/login", data)
+      .post("https://e-commerce-api.academlo.tech/api/v1/users/login", data)
       .then((resp) => {
-        localStorage.setItem("token", resp.data);
+        localStorage.setItem("token", resp.data.data.token);
 	dispatch(setIsLogged());
         navigate("/");
       })

@@ -13,8 +13,8 @@ export const getProductsSlice = createSlice({
 export const getProductsThunk = () => dispatch => {
     dispatch(setIsLoading(true));
     apiCalls({
-        url: "https://ecommerce-g1mf.onrender.com/api/v1/products",
-	resolve: res => dispatch(setProducts(res)),
+        url: "https://e-commerce-api.academlo.tech/api/v1/products",
+	resolve: res => dispatch(setProducts(res.data.products)),
 	reject: console.log,
 	$finally: () => dispatch(setIsLoading(false))
     });

@@ -21,18 +21,16 @@ const Product = () => {
     useEffect(() => {
         dispatch(setIsLoading(true));
         axios
-            .get(`https://ecommerce-g1mf.onrender.com/api/v1/products/${id}/`)
+            .get(`https://e-commerce-api.academlo.tech/api/v1/products/${id}/`)
             .then((resp) => {
-               setDetail(resp?.data);
-            //    console.log(resp.data)
-               filterClass(resp?.data)
-            //    console.log(resp.data)
+                setDetail(resp?.data?.data?.product);
+                filterClass(resp?.data?.data?.product.category)
             })
             .catch((error) => console.error(error))
             .finally(() => dispatch(setIsLoading(false)));
         
     }, [id]);
-   
+
     const filterClass = (category) => {
         const productsFiltered = products.filter( (p) => p.category.name == category);
         setProductsByCategory(productsFiltered)  
@@ -64,7 +62,6 @@ const Product = () => {
                                     }}
                                     // className="carousel_img"
                                     src={detail?.productImgs?.[0]}
-                                    
                                     alt="First slide"
                                 />
                             </Carousel.Item>
